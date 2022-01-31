@@ -40,7 +40,7 @@ export class ContactsService {
   }  
 
   saveAddresses(address:Address,id:number): Observable<Address> {
-    return this.http.put<Address>(`${this.apiUrl}/contacts/${id}`, address, httpOptions)
+    return this.http.post<Address>(`${this.apiUrl}/contacts/${id}/addresses`, address, httpOptions)
       // .pipe(
       //   catchError(this.handleError('saveAddresses', hero))
       // );
