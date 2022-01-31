@@ -1,0 +1,33 @@
+<div class="page-margin">
+    <mat-card>
+        <img class="contact-img" src="{{contact?.avatar}}" alt="contact profile picture"
+            onerror="this.src='/assets/default_user.png';">
+        <span>{{ contact?.first_name }}</span>
+
+        <form [formGroup]="addAddressForm" (ngSubmit)="onClickSubmit(addAddressForm.value)">
+            <div formArrayName="addresses" *ngFor="let add of addressControls.controls; let i = index">
+                <div [formGroupName]="i">
+                    <h4>Address #{{i+1}}</h4>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Street 1</mat-label>
+                        <input id="{{'street1'+i}}" matInput placeholder="O Connel St." formControlName="street1" >
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Street 2</mat-label>
+                        <input id="{{'street2'+i}}" matInput placeholder="" formControlName="street2">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Town</mat-label>
+                        <input id="{{'town'+i}}" matInput placeholder="Dublin" formControlName="town">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Country</mat-label>
+                        <input id="{{'country'+i}}" matInput placeholder="Dublin" formControlName="country">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button color="primary" (click)="addNewEntry()" class="btn-margin-right">Add New Address</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </form>
+    </mat-card>
+</div>
