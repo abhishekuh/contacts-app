@@ -59,13 +59,13 @@ export class ContactDetailComponent implements OnInit {
   }
 
   onClickSubmit(formData: any) {
-
-    const data = {
-      // contactId: this.contactID,
-      addresses: this.addAddressForm.value.addresses,
-    }
-    // console.log(data)
-    this.contactsService.saveAddresses(data, this.contactID).subscribe(res => {
+    const addresses = this.addAddressForm.value.addresses
+    // const data = {
+    //   // contactId: this.contactID,
+    //   addresses: this.addAddressForm.value.addresses,
+    // }
+    // console.log(data,"form data")
+    this.contactsService.saveAddresses(addresses, this.contactID).subscribe(res => {
       console.log(res)
       // this.router.navigateByUrl('/home')
     })
