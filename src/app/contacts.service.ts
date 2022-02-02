@@ -39,10 +39,28 @@ export class ContactsService {
       // );
   }  
 
-  saveAddresses(address:Address,id:number): Observable<Address> {
+  saveAddress(address:Address,id:number): Observable<Address> {
     return this.http.post<Address>(`${this.apiUrl}/contacts/${id}/addresses`, address, httpOptions)
       // .pipe(
       //   catchError(this.handleError('saveAddresses', hero))
       // );
   }
+
+  updateAddress(address:any,id:number) {
+    return this.http.put(`${this.apiUrl}/addresses/${id}`, address, httpOptions)
+      // .pipe(
+      //   catchError(this.handleError('saveAddresses', hero))
+      // );
+  }
+
+  deleteAddress(id:number) {
+    return this.http.delete(`${this.apiUrl}/addresses/${id}`, httpOptions)
+  }
+
+  getAddressesByID(id:number) {
+    return this.http.get(`${this.apiUrl}/addresses?contactId=${id}`)
+      // .pipe(
+        // catchError(this.handleError('getContacts', []))
+      // );
+  }  
 }
