@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { Contact } from './contact.model';
-import { Address } from './address.model';
+import { Contact } from '../models/contact.model';
+import { Address } from '../models/address.model';
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ContactsService } from '../contacts.service';
 
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
+import { ContactsService } from 'src/app/services/contacts.service';
 
 @Component({
   selector: 'app-contact-detail',
