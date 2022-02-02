@@ -12,6 +12,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -42,7 +44,9 @@ import { ContactsService } from './services/contacts.service';
     MatCardModule,
     MatListModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [ContactsService],
   bootstrap: [AppComponent]

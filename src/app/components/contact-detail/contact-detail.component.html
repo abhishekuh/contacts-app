@@ -24,10 +24,14 @@
                         <mat-label>Town</mat-label>
                         <input id="{{'town'+i}}" matInput placeholder="Dublin" formControlName="town">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width input-field" appearance="fill">
+                    <mat-form-field appearance="fill">
                         <mat-label>Country</mat-label>
-                        <input id="{{'country'+i}}" matInput placeholder="Dublin" formControlName="country">
-                    </mat-form-field>
+                        <mat-select formControlName="country">
+                          <mat-option *ngFor="let country of countryList" [value]="country.iso2">
+                            {{country.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     <span class="delete-btn" (click)="deleteRow(i)">X</span>
                 </div>
             </div>
@@ -36,3 +40,7 @@
         <button mat-raised-button color="primary" (click)="addNewEntry()" class="btn-margin-right new-address-btn">Add New Address</button>
     </mat-card>
 </div>
+
+<mat-form-field appearance="fill" style="display: none;">
+    <input matInput value="Disco party!" #message >
+  </mat-form-field>

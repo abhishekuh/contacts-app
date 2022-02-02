@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Contact } from '../models/contact.model';
 import { Address } from '../models/address.model';
+import { Country } from '../models/country.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,6 +24,10 @@ export class ContactsService {
   apiUrl = 'http://localhost:3000'
 
   constructor(private http: HttpClient) { }
+
+  getCountryList(): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}/countries`)
+  }
 
   getContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(`${this.apiUrl}/contacts`)

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { ContactsService } from 'src/app/services/contacts.service';
+import { Country } from 'src/app/models/country.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact-detail',
@@ -15,12 +17,13 @@ export class ContactDetailComponent implements OnInit {
   contactID: number
   addAddressForm: FormGroup
   addressesData: any
+  countryList: Country[] = []
 
   get addressControls(): FormArray {
     return <FormArray>this.addAddressForm.get('addresses');
   }
 
-  constructor(private contactsService: ContactsService, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private contactsService: ContactsService, private route: ActivatedRoute, private fb: FormBuilder,private _snackBar: MatSnackBar) {
     this.contactID = this.route.snapshot.params['id'];
 
     this.addAddressForm = this.fb.group({
@@ -28,6 +31,10 @@ export class ContactDetailComponent implements OnInit {
         this.addnewFormGroup()
       ])
     });
+
+    this.contactsService.getCountryList().subscribe(res => {
+      this.countryList = res
+    })
 
     let ctrLength = this.addressControls.length
     this.addressControls.at(ctrLength - 1).patchValue({
@@ -37,7 +44,6 @@ export class ContactDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.contactsService.getContactByID(this.contactID).subscribe(contact => {
       this.setContact(contact)
     });
@@ -91,11 +97,9 @@ export class ContactDetailComponent implements OnInit {
       for (let add of this.addressesData) {
         for (let [key, value] of Object.entries<any>(formData.addresses)) {
           if (add.id == value.id) {
-            console.log('update')
             this.updateAddress(formData.addresses[key])
           }
           else {
-            console.log('save')
             formData.addresses[key]['id'] = ''
             this.saveAddresses(formData.addresses[key])
           }
