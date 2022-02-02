@@ -1,11 +1,22 @@
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.page-margin{
+.page-margin {
     margin: 5em;
 }
 
-.text-center{
+.text-center {
     text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .page-margin {
+        margin: 1em;
+    }
 }

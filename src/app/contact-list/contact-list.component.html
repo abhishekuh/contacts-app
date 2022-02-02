@@ -1,9 +1,0 @@
-<mat-nav-list>
-    <a mat-list-item href="/contact/{{contact.id}}" *ngFor="let contact of contacts">
-        <img class="contact-img" src="{{contact.avatar}}" alt="contact profile picture" onerror="this.src='/assets/default_user.png';">
-        <span>{{ contact.first_name }}</span>
-    </a>
-</mat-nav-list>
-<div class="text-center" *ngIf="!contacts.length">
-    <h3>No Contacts to display !</h3>
-</div>

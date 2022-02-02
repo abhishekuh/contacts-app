@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { Contact } from './contact.model';
-import { Address } from './address.model';
+import { Contact } from '../models/contact.model';
+import { Address } from '../models/address.model';
+import { Country } from '../models/country.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,25 +25,35 @@ export class ContactsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET Contacts from the server */
+  getCountryList(): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}/countries`)
+  }
+
   getContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(`${this.apiUrl}/contacts`)
-      // .pipe(
-        // catchError(this.handleError('getContacts', []))
-      // );
+  }
+
+  saveContact(contact:any){
+    return this.http.post(`${this.apiUrl}/contacts/`,contact,httpOptions)
   }
 
   getContactByID(id:number): Observable<Contact> {
     return this.http.get<Contact>(`${this.apiUrl}/contacts/${id}`)
-      // .pipe(
-        // catchError(this.handleError('getContacts', []))
-      // );
   }  
 
-  saveAddresses(address:Address,id:number): Observable<Address> {
+  saveAddress(address:Address,id:number): Observable<Address> {
     return this.http.post<Address>(`${this.apiUrl}/contacts/${id}/addresses`, address, httpOptions)
-      // .pipe(
-      //   catchError(this.handleError('saveAddresses', hero))
-      // );
   }
+
+  updateAddress(address:any,id:number) {
+    return this.http.put(`${this.apiUrl}/addresses/${id}`, address, httpOptions)
+  }
+
+  deleteAddress(id:number) {
+    return this.http.delete(`${this.apiUrl}/addresses/${id}`, httpOptions)
+  }
+
+  getAddressesByID(id:number) {
+    return this.http.get(`${this.apiUrl}/addresses?contactId=${id}`)
+  }  
 }
