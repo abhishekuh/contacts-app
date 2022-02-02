@@ -3,6 +3,20 @@
         <img class="contact-img" src="{{contact.avatar}}" alt="contact profile picture" onerror="this.src='/assets/default_user.png';">
         <span>{{ contact.first_name }}</span>
     </a>
+    <h4>Add New Contact</h4>
+    <form [formGroup]="addContactForm" (ngSubmit)="onSubmit(addContactForm.value)">
+        <mat-form-field class="example-full-width input-field" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput required formControlName="first_name" >
+        </mat-form-field>
+        <mat-form-field class="example-full-width input-field" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput required formControlName="last_name" >
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary" type="submit" class="save-btn" [disabled]="!addContactForm.valid">Add</button>
+        </div>
+    </form>
 </mat-nav-list>
 <div class="text-center" *ngIf="!contacts.length">
     <h3>No Contacts to display !</h3>

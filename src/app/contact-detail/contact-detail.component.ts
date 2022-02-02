@@ -20,7 +20,6 @@ export class ContactDetailComponent implements OnInit {
     return <FormArray>this.addAddressForm.get('addresses');
   }
 
-
   constructor(private contactsService: ContactsService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.contactID = this.route.snapshot.params['id'];
 
@@ -42,7 +41,6 @@ export class ContactDetailComponent implements OnInit {
     this.contactsService.getContactByID(this.contactID).subscribe(contact => {
       this.setContact(contact)
     });
-
     this.getAddresses()
   }
 
@@ -111,13 +109,11 @@ export class ContactDetailComponent implements OnInit {
 
   saveAddresses(address: any) {
     this.contactsService.saveAddress(address, this.contactID).subscribe(res => {
-      console.log(res)
     })
   }
 
   updateAddress(address: any) {
     this.contactsService.updateAddress(address, this.contactID).subscribe(res => {
-      console.log(res)
     })
   }
 
@@ -125,7 +121,6 @@ export class ContactDetailComponent implements OnInit {
     this.addressControls.removeAt(index);
     let control = this.addressControls.value[0]
     this.contactsService.deleteAddress(control.id).subscribe(res => {
-      console.log(res)
     })
   }
 

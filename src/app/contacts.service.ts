@@ -24,33 +24,24 @@ export class ContactsService {
 
   constructor(private http: HttpClient) { }
 
-  /** GET Contacts from the server */
   getContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(`${this.apiUrl}/contacts`)
-      // .pipe(
-        // catchError(this.handleError('getContacts', []))
-      // );
+  }
+
+  saveContact(contact:any){
+    return this.http.post(`${this.apiUrl}/contacts/`,contact,httpOptions)
   }
 
   getContactByID(id:number): Observable<Contact> {
     return this.http.get<Contact>(`${this.apiUrl}/contacts/${id}`)
-      // .pipe(
-        // catchError(this.handleError('getContacts', []))
-      // );
   }  
 
   saveAddress(address:Address,id:number): Observable<Address> {
     return this.http.post<Address>(`${this.apiUrl}/contacts/${id}/addresses`, address, httpOptions)
-      // .pipe(
-      //   catchError(this.handleError('saveAddresses', hero))
-      // );
   }
 
   updateAddress(address:any,id:number) {
     return this.http.put(`${this.apiUrl}/addresses/${id}`, address, httpOptions)
-      // .pipe(
-      //   catchError(this.handleError('saveAddresses', hero))
-      // );
   }
 
   deleteAddress(id:number) {
@@ -59,8 +50,5 @@ export class ContactsService {
 
   getAddressesByID(id:number) {
     return this.http.get(`${this.apiUrl}/addresses?contactId=${id}`)
-      // .pipe(
-        // catchError(this.handleError('getContacts', []))
-      // );
   }  
 }
